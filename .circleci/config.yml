@@ -16,7 +16,7 @@ jobs:
             - dotnet-packages-v1-
       - run:
           name: "Install project dependencies"
-          command: dotnet.exe Update-Package -reinstall
+          command: dotnet.exe restore
       - save_cache:
           paths:
             - C:\Users\circleci\.nuget\packages

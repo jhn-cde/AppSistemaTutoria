@@ -11,13 +11,10 @@ jobs:
       name: windows/default
     steps:
       - checkout:
-          path: ~/spring-tutorial
-      - run:
-          name: "check current directory"
-          command: cd
+          path: ~/Proyecto Final
       - restore_cache:
           keys:
-            - dotnet-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentacioness.csproj" }}
+            - dotnet-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}
             - dotnet-packages-v1-
       - run:
           name: "Install project dependencies"

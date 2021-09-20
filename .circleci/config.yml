@@ -10,7 +10,7 @@ jobs:
     executor:
       name: windows/default
     steps:
-      - checkout
+      - checkout:
           path: ~/Proyecto Final
       - restore_cache:
           keys:

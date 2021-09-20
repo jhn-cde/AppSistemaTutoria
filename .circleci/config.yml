@@ -13,7 +13,9 @@ jobs:
       - restore_cache:
           keys:
             - dotnet-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}
-            - dotnet-packages-v1-
+            - dotnet-packages-v1-{{ checksum "CapaDatos/CapaDatos.csproj" }}
+            - dotnet-packages-v1-{{ checksum "CapaEntidad/CapaEntidad.csproj" }}
+            - dotnet-packages-v1-{{ checksum "CapaNegocio/CapaNegocio.csproj" }}
       - run:
           name: "Install project dependencies"
           command: dotnet.exe restore
@@ -24,9 +26,6 @@ jobs:
       - run:
           name: "Run Application Tests"
           command: dotnet.exe test -v n --results-directory:test_coverage --collect:"Code Coverage"
-      - run:
-          name: "Print Working Directory"
-          command: pwd
       - store_artifacts:
           path: C:\Users\circleci\project\test_coverage
   build:
@@ -39,7 +38,7 @@ jobs:
           name: "Build Application according to some given configuration"
           command: dotnet.exe build --configuration Release
 workflows:
-  test_and_build:
+  build-and-test:
     jobs:
       - test
       - build:

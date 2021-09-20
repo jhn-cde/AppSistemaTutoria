@@ -2,11 +2,10 @@ version: 2.1
 
 orbs:
   windows: circleci/windows@2.2.0
-  nuget-cache: 
 
 jobs:
   build:
-  executor: win/default
+    executor: win/default
 
   steps:
     - checkout

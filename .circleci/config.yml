@@ -10,10 +10,11 @@ jobs:
       shell: powershell.exe
     steps:
       - checkout
-      - run: systeminfo
+      - restore_cache:
+          keys:
       - run:
-          name: "Check docker"
-          shell: powershell.exe
-          command: |
-            docker info
-            docker run hello-world:nanoserver-1809
+          name: "Install project dependencies"
+          command: dotnet.exe restore
+      - save_cache:
+          paths:
+            - C:\Users\circleci\.nuget\packages

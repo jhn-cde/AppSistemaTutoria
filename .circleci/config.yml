@@ -15,6 +15,3 @@ jobs:
       - run:
           name: "Install project dependencies"
           command: dotnet.exe restore
-      - save_cache:
-          paths:
-            - C:\Users\circleci\.nuget\packages

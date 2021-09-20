@@ -5,17 +5,23 @@ orbs:
 
 jobs:
   test:
+    working_directory: ~/Proyecto Final\AppSistemaTutoria
     description: Setup and run application tests
     executor:
       name: windows/default
     steps:
-      - checkout
+      - checkout:
+          path: ~/spring-tutorial
+      - run:
+          name: "check current directory"
+          command: cd ,
       - restore_cache:
           keys:
             - dotnet-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentacioness.csproj" }}
+            - dotnet-packages-v1-
       - run:
           name: "Install project dependencies"
-          command: dotnet.exe restore
+          command: dotnet.exe Update-Package -reinstall
       - save_cache:
           paths:
             - C:\Users\circleci\.nuget\packages

@@ -10,8 +10,6 @@ jobs:
       shell: powershell.exe
     steps:
       - checkout
-      - restore_cache:
-          keys:
       - run:
           name: "Install project dependencies"
           command: dotnet.exe restore

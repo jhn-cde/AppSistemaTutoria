@@ -5,13 +5,11 @@ orbs:
 
 jobs:
   test:
-    working_directory: ~/Proyecto Final/AppSistemaTutoria
     description: Setup and run application tests
     executor:
       name: windows/default
     steps:
-      - checkout:
-          path: ~/Proyecto Final
+      - checkout
       - restore_cache:
           keys:
             - dotnet-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}

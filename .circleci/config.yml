@@ -1,33 +1,15 @@
 version: 2.1
 
 workflows:
-  version: 2
   test:
     jobs:
       - build-all
-      - test-windows:
-          name: .NET 5.0 - Windows
-          build-target-framework: net5.0
-          test-target-framework: net5.0
-          requires:
-            - build-all
-      - test-windows:
-          name: .NET Framework 4.5.2 - Windows
-          build-target-framework: net452
-          test-target-framework: net452
-          requires:
-            - build-all
       - test-windows:
           name: .NET Framework 4.7.1 - Windows
           build-target-framework: net471
           test-target-framework: net471
           requires:
             - build-all
-
-
-
-
-
 
 
 

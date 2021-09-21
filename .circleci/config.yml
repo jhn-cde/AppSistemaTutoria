@@ -14,30 +14,33 @@ jobs:
           keys:
             - dotnet-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}-{{ checksum "CapaNegocio/CapaNegocios.csproj" }}-{{ checksum "CapaEntidad/CapaEntidades.csproj" }}-{{ checksum "CapaDatos/CapaDatos.csproj" }}-{{ checksum "PruebasUnitarias/PruebasUnitarias.csproj" }}
       - run:
+          name: "Install nuget dependencies"
+          command: nuget restore
+      - run:
           name: "Install project dependencies"
-          command: dotnet restore
+          command: dotnet.exe restore
       - save_cache:
           paths:
             - C:\Users\circleci\.nuget\packages
           key: dotnet-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}-{{ checksum "CapaNegocio/CapaNegocios.csproj" }}-{{ checksum "CapaEntidad/CapaEntidades.csproj" }}-{{ checksum "CapaDatos/CapaDatos.csproj" }}-{{ checksum "PruebasUnitarias/PruebasUnitarias.csproj" }}
       - run:
-          name: "Print Working Directory"
-          command: pwd
-      - run:
-          name: "nuget packages"
-          command: nuget restore
-      - run:
-          name: "Install project dependencies"
-          command: dotnet restore
-      - run:
-          name: "build SDK for .net Framework 4.6.1"
-          command: dotnet build CapaPresentaciones
-      - run:
           name: "Run Application Tests"
-          command: dotnet test PruebasUnitarias/PruebasUnitarias.csproj -f net461
+          command: dotnet.exe test PruebasUnitarias/PruebasUnitarias.csproj -v n --results-directory:test_coverage --collect:"Code Coverage"
       - store_artifacts:
           path: C:\Users\circleci\project\test_coverage
+  build:
+    description: Build application with Release configuration
+    executor:
+      name: windows/default
+    steps:
+      - checkout
+      - run:
+          name: "Build Application according to some given configuration"
+          command: dotnet.exe build --configuration Release
 workflows:
-  test_project:
+  test_and_build:
     jobs:
       - test
+      - build:
+          requires:
+            - test

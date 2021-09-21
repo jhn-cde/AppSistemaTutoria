@@ -26,9 +26,6 @@ jobs:
             - C:\Users\circleci\.nuget\packages
           key: nuget-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}
       - run:
-          name: "Run build step"
-          command: dotnet.exe publish -c Release -r win10-x64
-      - run:
           name: "Run Application Tests"
           command: dotnet.exe test PruebasUnitarias/PruebasUnitarias.csproj -v n --results-directory:test_coverage --collect:"Code Coverage"
       - store_artifacts:

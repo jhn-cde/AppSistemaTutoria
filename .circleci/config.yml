@@ -27,7 +27,10 @@ jobs:
           command: pwd
       - run:
           name: "build SDK for .net Framework 4.6.1"
-          command: dotnet build CapaNegocio -f net461
+          command: dotnet build CapaPresentaciones -f net461
+      - run:
+          name: "build SDK for .net Framework 4.6.1"
+          command: nuget restore
       - run:
           name: "Run Application Tests"
           command: dotnet test PruebasUnitarias/PruebasUnitarias.csproj -f net461

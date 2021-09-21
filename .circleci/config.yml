@@ -6,7 +6,8 @@ orbs:
 jobs:
   test:
     description: Setup and run application tests
-    executor: win/default
+    executor:
+      name: windows/default
     environment:
       TESTFRAMEWORK: net461
     steps:
@@ -32,7 +33,7 @@ jobs:
           command: dotnet restore
       - run:
           name: "build SDK for .net Framework 4.6.1"
-          command: dotnet build CapaPresentaciones -f net461
+          command: dotnet build CapaPresentaciones
       - run:
           name: "Run Application Tests"
           command: dotnet test PruebasUnitarias/PruebasUnitarias.csproj -f net461

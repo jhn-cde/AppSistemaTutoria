@@ -12,7 +12,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - nuget-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}-{{ checksum "CapaNegocio/CapaNegocios.csproj" }}-{{ checksum "CapaEntidad/CapaEntidades.csproj" }}-{{ checksum "CapaDatos/CapaDatos.csproj" }}-{{ checksum "PruebasUnitarias/PruebasUnitarias.csproj" }}
+            - nuget-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}
       - run:
           name: "Install nuget dependencies"
           command: nuget restore
@@ -22,7 +22,7 @@ jobs:
       - save_cache:
           paths:
             - C:\Users\circleci\packages
-          key: nuget-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}-{{ checksum "CapaNegocio/CapaNegocios.csproj" }}-{{ checksum "CapaEntidad/CapaEntidades.csproj" }}-{{ checksum "CapaDatos/CapaDatos.csproj" }}-{{ checksum "PruebasUnitarias/PruebasUnitarias.csproj" }}
+          key: nuget-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}
       - run:
           name: "Run Application Tests"
           command: dotnet.exe test PruebasUnitarias/PruebasUnitarias.csproj -v n --results-directory:test_coverage --collect:"Code Coverage"

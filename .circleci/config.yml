@@ -14,20 +14,20 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - dotnet-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}-{{ checksum "PruebasUnitarias/PruebasUnitarias.csproj" }}
+            - dotnet-packages-v1-{{ checksum "CapaPresentacione/CapaPresentaciones.csproj" }}-{{ checksum "CapaNegocios/CapaNegocios.csproj" }}-{{ checksum "PruebasUnitarias/PruebasUnitarias.csproj" }}
       - run:
           name: "Install project dependencies"
           command: dotnet restore
       - save_cache:
           paths:
             - C:\Users\circleci\.nuget\packages
-          key: dotnet-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}-{{ checksum "PruebasUnitarias/PruebasUnitarias.csproj" }}
+          key: dotnet-packages-v1-{{ checksum "CapaPresentacione/CapaPresentaciones.csproj" }}-{{ checksum "PruebasUnitarias/PruebasUnitarias.csproj" }}
       - run:
           name: "Print Working Directory"
           command: pwd
       - run:
           name: "build SDK for .net Framework 4.6.1"
-          command: dotnet build CapaPresentaciones -f net461
+          command: dotnet build CapaNegocio -f net461
       - run:
           name: "Run Application Tests"
           command: dotnet test PruebasUnitarias/PruebasUnitarias.csproj -f net461

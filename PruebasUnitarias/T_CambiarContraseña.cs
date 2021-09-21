@@ -12,7 +12,7 @@ namespace PruebasUnitarias
     [TestClass]
     public class T_CambiarContraseña
     {
-        readonly P_CambiarContraseña cambiarContraseña = new P_CambiarContraseña(true);
+        readonly P_CambiarContraseña cambiarContraseña = new P_CambiarContraseña(tr
         public T_CambiarContraseña()
         {
             //

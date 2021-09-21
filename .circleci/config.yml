@@ -10,7 +10,6 @@ jobs:
       name: windows/default
     steps:
       - checkout
-      run: systeminfo
       - restore_cache:
           keys:
             - nuget-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}

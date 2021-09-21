@@ -12,23 +12,23 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - dotnet-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}
+            - dotnet-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}-{{ checksum "PruebasUnitarias/PruebasUnitarias.csproj" }}
       - run:
           name: "Install project dependencies"
           command: dotnet.exe restore
       - save_cache:
           paths:
             - C:\Users\circleci\.nuget\packages
-          key: dotnet-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}
+          key: dotnet-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}-{{ checksum "PruebasUnitarias/PruebasUnitarias.csproj" }}
       - run:
           name: "Run Application Tests"
-          command: dotnet.exe test -v n --results-directory:test_coverage --collect:"Code Coverage"
+          command: dotnet.exe test PruebasUnitarias/PruebasUnitarias.csproj -v n --results-directory:test_coverage --collect:"Code Coverage"
       - run:
           name: "Print Working Directory"
           command: pwd
       - store_artifacts:
           path: C:\Users\circleci\project\test_coverage
 workflows:
-  test_and_build:
+  test_project:
     jobs:
       - test

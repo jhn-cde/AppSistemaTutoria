@@ -10,6 +10,7 @@ jobs:
       name: windows/default
     steps:
       - checkout
+      run: systeminfo
       - restore_cache:
           keys:
             - nuget-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}
@@ -21,8 +22,11 @@ jobs:
           command: dotnet.exe restore
       - save_cache:
           paths:
-            - C:\Users\circleci\packages
+            - C:\Users\circleci.nuget\packages
           key: nuget-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}
+      - run:
+          name: "Run build step"
+          command: dotnet.exe publish -c Release -r win10-x64
       - run:
           name: "Run Application Tests"
           command: dotnet.exe test PruebasUnitarias/PruebasUnitarias.csproj -v n --results-directory:test_coverage --collect:"Code Coverage"
@@ -34,9 +38,6 @@ jobs:
       name: windows/default
     steps:
       - checkout
-      - run:
-          name: "Install nuget dependencies"
-          command: nuget restore
       - run:
           name: "Build Application according to some given configuration"
           command: dotnet.exe build --configuration Release

@@ -6,8 +6,7 @@ orbs:
 jobs:
   test:
     description: Setup and run application tests
-    executor:
-      name: windows/default
+    executor: win/default
     environment:
       TESTFRAMEWORK: net461
     steps:

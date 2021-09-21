@@ -23,14 +23,14 @@ jobs:
             - C:\Users\circleci\.nuget\packages
           key: dotnet-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}-{{ checksum "PruebasUnitarias/PruebasUnitarias.csproj" }}
       - run:
+          name: "Print Working Directory"
+          command: pwd
+      - run:
           name: "build SDK for .net Framework 4.6.1"
           command: dotnet build project/CapaPresentaciones -f net461
       - run:
           name: "Run Application Tests"
           command: dotnet test PruebasUnitarias/PruebasUnitarias.csproj -f net461
-      - run:
-          name: "Print Working Directory"
-          command: pwd
       - store_artifacts:
           path: C:\Users\circleci\project\test_coverage
 workflows:

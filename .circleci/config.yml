@@ -21,7 +21,7 @@ jobs:
           command: dotnet.exe restore
       - save_cache:
           paths:
-            - C:\Users\circleci\.nuget\packages
+            - C:\Users\circleci\packages
           key: dotnet-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}-{{ checksum "CapaNegocio/CapaNegocios.csproj" }}-{{ checksum "CapaEntidad/CapaEntidades.csproj" }}-{{ checksum "CapaDatos/CapaDatos.csproj" }}-{{ checksum "PruebasUnitarias/PruebasUnitarias.csproj" }}
       - run:
           name: "Run Application Tests"

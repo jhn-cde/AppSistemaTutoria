@@ -8,6 +8,8 @@ jobs:
     description: Setup and run application tests
     executor:
       name: windows/default
+    environment:
+      TESTFRAMEWORK: net461
     steps:
       - checkout
       - restore_cache:
@@ -15,17 +17,17 @@ jobs:
             - dotnet-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}-{{ checksum "PruebasUnitarias/PruebasUnitarias.csproj" }}
       - run:
           name: "Install project dependencies"
-          command: dotnet.exe restore
+          command: dotnet restore
       - save_cache:
           paths:
             - C:\Users\circleci\.nuget\packages
           key: dotnet-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}-{{ checksum "PruebasUnitarias/PruebasUnitarias.csproj" }}
       - run:
-          name: "Run Application Tests"
-          command: dotnet.exe test PruebasUnitarias/PruebasUnitarias.csproj -v n --results-directory:test_coverage --collect:"Code Coverage"
+          name: "build SDK for .net Framework 4.6.1"
+          command: dotnet build src/CapaPresentaciones -f net461
       - run:
-          name: "Print Working Directory"
-          command: pwd
+          name: "Run Application Tests"
+          command: dotnet test PruebasUnitarias/PruebasUnitarias.csproj -f net461
       - store_artifacts:
           path: C:\Users\circleci\project\test_coverage
 workflows:

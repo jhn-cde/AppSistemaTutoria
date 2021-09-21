@@ -9,6 +9,7 @@ jobs:
       name: windows/default
     environment:
       BUILDFRAMEWORKS: net471
+      TESTFRAMEWORK: net471
     steps:
       - checkout
       - restore_cache:

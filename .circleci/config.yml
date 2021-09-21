@@ -8,8 +8,6 @@ jobs:
     description: Setup and run application tests
     executor:
       name: windows/default
-    environment:
-      TESTFRAMEWORK: net461
     steps:
       - checkout
       - restore_cache:

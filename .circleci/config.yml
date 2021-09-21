@@ -7,7 +7,7 @@ jobs:
   test:
     description: Setup and run application tests
     executor:
-      name: windows/default
+      name: win/default
     environment:
       TESTFRAMEWORK: net461
     steps:
@@ -28,6 +28,9 @@ jobs:
       - run:
           name: "nuget packages"
           command: nuget restore
+      - run:
+          name: "Install project dependencies"
+          command: dotnet restore
       - run:
           name: "build SDK for .net Framework 4.6.1"
           command: dotnet build CapaPresentaciones -f net461

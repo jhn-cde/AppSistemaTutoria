@@ -23,7 +23,7 @@ jobs:
           command: dotnet.exe restore
       - save_cache:
           paths:
-            - C:\Users\circleci.nuget\packages
+            - C:\Users\circleci\.nuget\packages
           key: nuget-packages-v1-{{ checksum "CapaPresentaciones/CapaPresentaciones.csproj" }}
       - run:
           name: "Run build step"

@@ -16,7 +16,6 @@ namespace CapaPresentaciones
 {
     public partial class P_CambiarContraseña : Form
     {
-	bool str = "asdas";
         // Atributos
         public string Usuario = "";
         public string Correo = "";
